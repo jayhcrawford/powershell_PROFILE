@@ -4,8 +4,12 @@ New-Alias -Name s -Value Get-GitStatus -Force -Option AllScope
 function Clear-Screen { & clear $args }
 New-Alias -Name q -Value Clear-Screen
 
-function Get-GitCommit { & git commit -ev $args }
+function Get-GitDiff { & git diff $args }
+New-Alias -Name gd -Value Get-GitDiff
+
+function Get-GitCommit { & git commit -m $args }
 New-Alias -Name c -Value Get-GitCommit -Force -Option AllScope
+
 function Get-GitAdd { & git add --all $args }
 New-Alias -Name ga -Value Get-GitAdd -Force -Option AllScope
 
@@ -36,15 +40,15 @@ New-Alias -Name gll -Value Get-GitPull
 function Get-GitPush { & git pull $args }
 New-Alias -Name gpp -Value Get-GitPush
 
-function Get-GitCheckoutPreviousBranch { & git checkout - $args}
+function Get-GitCheckoutPreviousBranch { & git checkout - $args }
 New-Alias -Name gcop -Value Get-GitCheckoutPreviousBranch
 
 function Open-AddAliases { code $PROFILE }
 New-Alias -Name addAliases -Value Open-AddAliases
 
 function Print-Things-I-Forgot {
-    
-        echo "F2 - Open previous commands" 
+
+        echo "F2 - Open previous commands"
 
 }
 
