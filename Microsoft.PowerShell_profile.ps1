@@ -1,11 +1,14 @@
 function Get-GitStatus { & git status $args }
 New-Alias -Name s -Value Get-GitStatus -Force -Option AllScope
 
+function Get-GetSwitch { & git switch $args }
+New-Alias -Name gs -Value Get-GetSwitch -Force -Option AllScope
+
 function Clear-Screen { & clear $args }
 New-Alias -Name q -Value Clear-Screen
 
 function Get-GitDiff { & git diff $args }
-New-Alias -Name gd -Value Get-GitDiff
+New-Alias -Name gd -Value Get-GitDiff -Force -Option AllScope
 
 function Get-GitCommit { & git commit -m $args }
 New-Alias -Name c -Value Get-GitCommit -Force -Option AllScope
@@ -54,3 +57,14 @@ function Print-Things-I-Forgot {
 
 # Make `tif` an alias for the function
 Set-Alias -Name tif -Value Print-Things-I-Forgot
+
+function Write-Daily {
+    param(
+        [Parameter(Mandatory=$true, Position=0)]
+        [string]$Text
+    )
+    # Overwrite the file with the text
+    Set-Content -Path "$HOME\.daily.txt" -Value $Text
+}
+Set-Alias wdd Write-Daily
+
