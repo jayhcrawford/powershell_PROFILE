@@ -1,11 +1,14 @@
 function Get-GitStatus { & git status $args }
 New-Alias -Name s -Value Get-GitStatus -Force -Option AllScope
 
+function Get-GetSwitch { & git switch $args }
+New-Alias -Name gs -Value Get-GetSwitch -Force -Option AllScope
+
 function Clear-Screen { & clear $args }
 New-Alias -Name q -Value Clear-Screen
 
 function Get-GitDiff { & git diff $args }
-New-Alias -Name gd -Value Get-GitDiff
+New-Alias -Name gd -Value Get-GitDiff -Force -Option AllScope
 
 function Get-GitCommit { & git commit -m $args }
 New-Alias -Name c -Value Get-GitCommit -Force -Option AllScope
