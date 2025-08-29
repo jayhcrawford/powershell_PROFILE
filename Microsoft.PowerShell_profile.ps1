@@ -51,7 +51,7 @@ New-Alias -Name addAliases -Value Open-AddAliases
 
 function Print-Things-I-Forgot {
 
-        echo "F2 - Open previous commands"
+    echo "F2 - Open previous commands"
 
 }
 
@@ -60,7 +60,7 @@ Set-Alias -Name tif -Value Print-Things-I-Forgot
 
 function Write-Daily {
     param(
-        [Parameter(Mandatory=$true, Position=0)]
+        [Parameter(Mandatory = $true, Position = 0)]
         [string]$Text
     )
     # Overwrite the file with the text
