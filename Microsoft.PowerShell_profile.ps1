@@ -49,22 +49,107 @@ New-Alias -Name gcop -Value Get-GitCheckoutPreviousBranch
 function Open-AddAliases { code $PROFILE }
 New-Alias -Name addAliases -Value Open-AddAliases
 
-function Print-Things-I-Forgot {
+function Show-Things-I-Forgot {
 
-    echo "F2 - Open previous commands"
+    Write-Host "F2 - Open previous commands"
 
 }
+Set-Alias tif Show-Things-I-Forgot
 
 # Make `tif` an alias for the function
-Set-Alias -Name tif -Value Print-Things-I-Forgot
-
 function Write-Daily {
     param(
-        [Parameter(Mandatory = $true, Position = 0)]
-        [string]$Text
+        [Parameter(Mandatory = $true, Position = 0, ValueFromRemainingArguments = $true)]
+        [string[]]$Text
     )
-    # Overwrite the file with the text
-    Set-Content -Path "$HOME\.daily.txt" -Value $Text
+
+    # Build numbered lines
+    $numberedLines = for ($i = 0; $i -lt $Text.Count; $i++) {
+        "$($i + 1). $($Text[$i])"
+    }
+
+    # Overwrite the file with the numbered lines
+    Set-Content -Path "$HOME\.daily.txt" -Value $numberedLines
 }
 Set-Alias wdd Write-Daily
 
+function Show-Daily {
+    param (
+        [string]$Path = "$HOME/.daily.txt"
+    )
+    if (Test-Path $Path) {
+        Get-Content $Path
+    }
+    else {
+        Write-Host "File not found: $Path"
+    }
+}
+Set-Alias sdd Show-Daily
+
+# Alias: stt  →  Set-TaskStrikeThrough
+Set-Alias -Name stt -Value Set-TaskStrikeThrough
+
+function Set-TaskStrikeThrough {
+    [CmdletBinding()]
+    param(
+        # One or more line numbers to toggle strike-through on
+        [Parameter(Mandatory = $true, Position = 0)]
+        [int[]]$Number
+    )
+
+    $path = Join-Path $HOME ".daily.txt"
+    if (-not (Test-Path $path)) {
+        Write-Error "No .daily.txt found at $path"
+        return
+    }
+
+    # Load lines
+    $lines = Get-Content -Path $path
+
+    # ANSI sequences for strike-through on/off
+    $ESC = [char]27
+    $ON = "$ESC[9m"
+    $OFF = "$ESC[0m"
+
+    foreach ($n in $Number) {
+        if ($n -le 0 -or $n -gt $lines.Count) {
+            Write-Warning "Line $n is out of range (1..$($lines.Count)). Skipping."
+            continue
+        }
+
+        $line = $lines[$n - 1]
+
+        # Expect format like: "1. buy groceries"
+        if ($line -match '^\s*(\d+)\.\s*(.*)$') {
+            $prefix = "$($Matches[1]). "
+            $body = $Matches[2]
+
+            # Detect existing strike-through (wrapped with ON...OFF)
+            $isStruck = $body.StartsWith($ON) -and $body.EndsWith($OFF)
+
+            if ($isStruck) {
+                # Remove strike-through (toggle off)
+                $clean = $body -replace [regex]::Escape($ON), '' -replace [regex]::Escape($OFF), ''
+                $lines[$n - 1] = "$prefix$clean"
+            }
+            else {
+                # Add strike-through
+                $lines[$n - 1] = "$prefix$ON$body$OFF"
+            }
+        }
+        else {
+            # If the line doesn't match the expected "N. text" pattern, just wrap whole line
+            $isStruck = $line.StartsWith($ON) -and $line.EndsWith($OFF)
+            $lines[$n - 1] = if ($isStruck) {
+                $line -replace [regex]::Escape($ON), '' -replace [regex]::Escape($OFF), ''
+            }
+            else {
+                "$ON$line$OFF"
+            }
+        }
+    }
+
+    # Save back
+    Set-Content -Path $path -Value $lines
+}
+Set-Alias stt Set-TaskStrikeThrough
