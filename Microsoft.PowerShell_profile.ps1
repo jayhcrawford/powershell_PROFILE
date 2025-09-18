@@ -156,8 +156,8 @@ Set-Alias stt Set-TaskStrikeThrough
 
 
 function Start-Nvim {
-    Set-Location E:\nvim\bin
-    .\nvim.exe
+    E:\nvim\bin\nvim.exe
+    
 }
 Set-Alias envim Start-Nvim
 
