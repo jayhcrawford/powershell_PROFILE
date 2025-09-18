@@ -155,20 +155,33 @@ function Set-TaskStrikeThrough {
 Set-Alias stt Set-TaskStrikeThrough
 
 
+# Helper function to get the drive letter from USB_DriveName.txt
+function Get-USBDrive {
+    $profileDir = Split-Path $PROFILE
+    $usbFile = Join-Path $profileDir "USB_DriveName.txt"
+
+    if (Test-Path $usbFile) {
+        Get-Content $usbFile | Select-Object -First 1
+    } else {
+        throw "USB_DriveName.txt not found in $profileDir"
+    }
+}
+
+# Function to start Neovim
 function Start-Nvim {
-    E:\nvim\bin\nvim.exe
-    
+    $drive = Get-USBDrive
+    & "$drive\nvim\bin\nvim.exe"
 }
 Set-Alias envim Start-Nvim
 
+# Function to launch VS Code
 function Invoke-VSCode {
     param (
         [string]$Path = (Get-Location)
     )
-    & "E:\Microsoft VS Code\Code.exe" $Path
+    $drive = Get-USBDrive
+    & "$drive\Microsoft VS Code\Code.exe" $Path
 }
-
 Set-Alias ecode Invoke-VSCode
-
 
 
