@@ -153,3 +153,22 @@ function Set-TaskStrikeThrough {
     Set-Content -Path $path -Value $lines
 }
 Set-Alias stt Set-TaskStrikeThrough
+
+
+function Start-Nvim {
+    Set-Location E:\nvim\bin
+    .\nvim.exe
+}
+Set-Alias envim Start-Nvim
+
+function Invoke-VSCode {
+    param (
+        [string]$Path = (Get-Location)
+    )
+    & "E:\Microsoft VS Code\Code.exe" $Path
+}
+
+Set-Alias ecode Invoke-VSCode
+
+
+
