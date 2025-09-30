@@ -154,6 +154,7 @@ function Set-TaskStrikeThrough {
 }
 Set-Alias stt Set-TaskStrikeThrough
 
+<<<<<<< Updated upstream
 
 # Helper function to get the drive letter from USB_DriveName.txt
 function Get-USBDrive {
@@ -185,3 +186,25 @@ function Invoke-VSCode {
 Set-Alias ecode Invoke-VSCode
 
 
+=======
+function RunClass-OnWindows {
+    param(
+        [Parameter(Mandatory = $true, Position = 0)]
+        [string]$ScriptName
+    )
+
+    # Adjust this if your scripts live somewhere else
+    $rootDir = "C:\Users\jayha"
+
+    # Build the path to the script
+    $scriptPath = Join-Path $rootDir "$ScriptName.ps1"
+
+    if (Test-Path $scriptPath) {
+        Write-Host "Running script: $scriptPath"
+        & $scriptPath
+    } else {
+        Write-Host "Script not found: $scriptPath"
+    }
+}
+Set-Alias rcw RunClass-OnWindows
+>>>>>>> Stashed changes
