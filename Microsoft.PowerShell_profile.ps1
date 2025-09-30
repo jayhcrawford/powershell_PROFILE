@@ -154,8 +154,6 @@ function Set-TaskStrikeThrough {
 }
 Set-Alias stt Set-TaskStrikeThrough
 
-<<<<<<< Updated upstream
-
 # Helper function to get the drive letter from USB_DriveName.txt
 function Get-USBDrive {
     $profileDir = Split-Path $PROFILE
@@ -185,8 +183,6 @@ function Invoke-VSCode {
 }
 Set-Alias ecode Invoke-VSCode
 
-
-=======
 function RunClass-OnWindows {
     param(
         [Parameter(Mandatory = $true, Position = 0)]
@@ -207,4 +203,3 @@ function RunClass-OnWindows {
     }
 }
 Set-Alias rcw RunClass-OnWindows
->>>>>>> Stashed changes
