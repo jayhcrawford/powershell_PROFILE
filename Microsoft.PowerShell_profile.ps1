@@ -161,7 +161,8 @@ function Get-USBDrive {
 
     if (Test-Path $usbFile) {
         Get-Content $usbFile | Select-Object -First 1
-    } else {
+    }
+    else {
         throw "USB_DriveName.txt not found in $profileDir"
     }
 }
@@ -198,22 +199,28 @@ function RunClass-OnWindows {
     if (Test-Path $scriptPath) {
         Write-Host "Running script: $scriptPath"
         & $scriptPath
-    } else {
+    }
+    else {
         Write-Host "Script not found: $scriptPath"
     }
 }
 Set-Alias rcw RunClass-OnWindows
 
 function OpenPlanning {
-    
-    if ($IsMac) {
+
+    if ($IsMacOS) {
         Write-Host "PowerShell is running on macOS."
-    } elseif ($IsLinux) {
+        Set-Location -Path "$HOME/Documents/GitHub/plans/config"
+        & /bin/zsh -c 'source ./launch.zsh'
+    }
+    elseif ($IsLinux) {
         Write-Host "PowerShell is running on Linux."
-    } elseif ($IsWindows) {
+    }
+    elseif ($IsWindows) {
         # Write-Host "PowerShell is running on Windows."
-        C:\Users\jayha\plan.ps1	
-    } else {
+        C:\Users\jayha\plan.ps1
+    }
+    else {
         Write-Host "PowerShell is running on an unknown operating system."
     }
 }
