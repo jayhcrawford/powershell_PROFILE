@@ -203,3 +203,18 @@ function RunClass-OnWindows {
     }
 }
 Set-Alias rcw RunClass-OnWindows
+
+function OpenPlanning {
+    
+    if ($IsMac) {
+        Write-Host "PowerShell is running on macOS."
+    } elseif ($IsLinux) {
+        Write-Host "PowerShell is running on Linux."
+    } elseif ($IsWindows) {
+        # Write-Host "PowerShell is running on Windows."
+        C:\Users\jayha\plan.ps1	
+    } else {
+        Write-Host "PowerShell is running on an unknown operating system."
+    }
+}
+Set-Alias plan OpenPlanning
