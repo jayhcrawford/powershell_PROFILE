@@ -225,3 +225,9 @@ function OpenPlanning {
     }
 }
 Set-Alias plan OpenPlanning
+
+function Open-WebBusiness {
+    $scriptPath = Join-Path (Split-Path $PROFILE) "my_scripts/web_business.ps1"
+    & $scriptPath
+}
+Set-Alias wb Open-WebBusiness
