@@ -52,6 +52,7 @@ New-Alias -Name addAliases -Value Open-AddAliases
 function Show-Things-I-Forgot {
 
     Write-Host "F2 - Open previous commands"
+    Write-Host "gh repo view --web"
 
 }
 Set-Alias tif Show-Things-I-Forgot
