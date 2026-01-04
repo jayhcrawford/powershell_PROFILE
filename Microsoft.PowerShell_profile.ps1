@@ -49,6 +49,9 @@ New-Alias -Name gcop -Value Get-GitCheckoutPreviousBranch
 function Open-AddAliases { code $PROFILE }
 New-Alias -Name addAliases -Value Open-AddAliases
 
+function Open-GHRepo { gh repo view --web }
+New-Alias -Name gho -Value Open-GHRepo
+
 function Show-Things-I-Forgot {
 
     Write-Host "F2 - Open previous commands"
@@ -232,3 +235,9 @@ function Open-WebBusiness {
     & $scriptPath
 }
 Set-Alias wb Open-WebBusiness
+
+function Open-Weather {
+    $scriptPath = Join-Path (Split-Path $PROFILE) "my_scripts/weather.ps1"
+    & $scriptPath
+}
+Set-Alias weather Open-Weather 
