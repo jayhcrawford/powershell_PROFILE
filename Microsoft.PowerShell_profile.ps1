@@ -240,4 +240,38 @@ function Open-Weather {
     $scriptPath = Join-Path (Split-Path $PROFILE) "my_scripts/weather.ps1"
     & $scriptPath
 }
-Set-Alias weather Open-Weather 
+Set-Alias weather Open-Weather
+
+function Run-MyWebsite {
+    # Get the profile directory
+    $profileDir = Split-Path $PROFILE
+    $pathsFile = Join-Path $profileDir "paths.txt"
+    
+    # Check if paths.txt exists
+    if (-not (Test-Path $pathsFile)) {
+        Write-Error "paths.txt not found in $profileDir"
+        return
+    }
+    
+    # Read the file and find the my_website path
+    $content = Get-Content -Path $pathsFile -Raw
+    
+    # Match the pattern: my_website = "path"
+    if ($content -match 'my_website\s*=\s*"([^"]+)"') {
+        $path = $Matches[1]
+        
+        # Check if the path exists
+        if (Test-Path $path) {
+            Set-Location $path
+            & code .
+        }
+        else {
+            Write-Error "Path not found: $path"
+        }
+    }
+    else {
+        Write-Error "Could not find 'my_website' assignment in paths.txt"
+    }
+}
+Set-Alias -Name mw -Value Run-MyWebsite 
+
