@@ -289,8 +289,5 @@ function Start-WezTermProject {
     wezterm cli activate-pane-direction Left
     wezterm cli activate-pane-direction Right
     wezterm cli send-text "lazygit`n"
-    wezterm cli activate-pane-direction Left
-    wezterm cli activate-pane-direction Right
-    wezterm cli send-text "pwsh`n"
 }
 Set-Alias wproj Start-WezTermProject
