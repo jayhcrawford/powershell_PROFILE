@@ -275,3 +275,22 @@ function Run-MyWebsite {
 }
 Set-Alias -Name mw -Value Run-MyWebsite 
 
+
+function Start-WezTerm  {
+    $scriptPath = Join-Path (Split-Path $PROFILE) "my_scripts/start_wezterm.ps1"
+    & $scriptPath
+}
+Set-Alias start_wezterm Start-WezTerm  
+
+function Start-WezTermProject {
+    wezterm cli split-pane --left --percent 35 -- nvim
+    wezterm cli activate-pane-direction Right
+    wezterm cli split-pane --left --percent 20
+    wezterm cli activate-pane-direction Left
+    wezterm cli activate-pane-direction Right
+    wezterm cli send-text "lazygit`n"
+    wezterm cli activate-pane-direction Left
+    wezterm cli activate-pane-direction Right
+    wezterm cli send-text "pwsh`n"
+}
+Set-Alias wproj Start-WezTermProject

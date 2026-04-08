@@ -1,0 +1,1 @@
+Start-Process wezterm -WindowStyle Hidden
