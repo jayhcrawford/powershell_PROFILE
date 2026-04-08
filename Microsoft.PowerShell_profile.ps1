@@ -1,9 +1,17 @@
 if ($IsMacOS) {
-    $wezPath = "/Applications/WezTerm.app/Contents/MacOS"
-    if (-not ($env:PATH -split ":" | Where-Object { $_ -eq $wezPath })) {
-        $env:PATH += ":$wezPath"
+    $pathsToAdd = @(
+        "/Applications/WezTerm.app/Contents/MacOS",
+        "/opt/homebrew/bin",
+        "/usr/local/bin"
+    )
+
+    foreach ($p in $pathsToAdd) {
+        if (-not ($env:PATH -split ":" | Where-Object { $_ -eq $p })) {
+            $env:PATH += ":$p"
+        }
     }
 }
+
 function Get-GitStatus { & git status $args }
 New-Alias -Name s -Value Get-GitStatus -Force -Option AllScope
 
