@@ -1,3 +1,9 @@
+if ($IsMacOS) {
+    $wezPath = "/Applications/WezTerm.app/Contents/MacOS"
+    if (-not ($env:PATH -split ":" | Where-Object { $_ -eq $wezPath })) {
+        $env:PATH += ":$wezPath"
+    }
+}
 function Get-GitStatus { & git status $args }
 New-Alias -Name s -Value Get-GitStatus -Force -Option AllScope
 
@@ -246,20 +252,20 @@ function Run-MyWebsite {
     # Get the profile directory
     $profileDir = Split-Path $PROFILE
     $pathsFile = Join-Path $profileDir "paths.txt"
-    
+
     # Check if paths.txt exists
     if (-not (Test-Path $pathsFile)) {
         Write-Error "paths.txt not found in $profileDir"
         return
     }
-    
+
     # Read the file and find the my_website path
     $content = Get-Content -Path $pathsFile -Raw
-    
+
     # Match the pattern: my_website = "path"
     if ($content -match 'my_website\s*=\s*"([^"]+)"') {
         $path = $Matches[1]
-        
+
         # Check if the path exists
         if (Test-Path $path) {
             Set-Location $path
@@ -273,14 +279,14 @@ function Run-MyWebsite {
         Write-Error "Could not find 'my_website' assignment in paths.txt"
     }
 }
-Set-Alias -Name mw -Value Run-MyWebsite 
+Set-Alias -Name mw -Value Run-MyWebsite
 
 
-function Start-WezTerm  {
+function Start-WezTerm {
     $scriptPath = Join-Path (Split-Path $PROFILE) "my_scripts/start_wezterm.ps1"
     & $scriptPath
 }
-Set-Alias start_wezterm Start-WezTerm  
+Set-Alias start_wezterm Start-WezTerm
 
 function Start-WezTermProject {
     wezterm cli split-pane --left --percent 35 -- nvim
