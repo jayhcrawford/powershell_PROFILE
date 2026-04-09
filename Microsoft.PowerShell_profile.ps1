@@ -297,9 +297,10 @@ function Start-WezTerm {
 Set-Alias start_wezterm Start-WezTerm
 
 function Start-WezTermProject {
-    wezterm cli split-pane --left --percent 35 -- nvim
+    $cwd = $PWD.Path
+    wezterm cli split-pane --left --percent 35 --cwd "$cwd" -- nvim
     wezterm cli activate-pane-direction Right
-    wezterm cli split-pane --left --percent 20
+    wezterm cli split-pane --left --percent 20 --cwd "$cwd"
     wezterm cli activate-pane-direction Left
     wezterm cli activate-pane-direction Right
     wezterm cli send-text "lazygit`n"
