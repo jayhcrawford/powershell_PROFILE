@@ -306,3 +306,5 @@ function Start-WezTermProject {
     wezterm cli send-text "lazygit`n"
 }
 Set-Alias wproj Start-WezTermProject
+
+Set-Alias urfr "$PSScriptRoot\my_scripts\wezterm_multipane.ps1"

@@ -1,0 +1,7 @@
+/Users/jaycrawford/Documents/GitHub/org_urFriends/public
+/Users/jaycrawford/Documents/GitHub/org_urFriends/urhumans-api
+/Users/jaycrawford/Documents/GitHub/org_urFriends/cloud-functions
+/Users/jaycrawford/Documents/GitHub/org_urFriends/create-user-acct-service
+/Users/jaycrawford/Documents/GitHub/org_urFriends/create-user-acct-proxy
+/Users/jaycrawford/Documents/GitHub/org_urFriends/urfriends-stripe-webhooks
+/Users/jaycrawford/Documents/GitHub/org_urFriends/org_chart
