@@ -33,10 +33,6 @@ New-Alias -Name ga -Value Get-GitAdd -Force -Option AllScope
 function Get-GitTree { & git log --all --graph --oneline --decorate --all $args }
 New-Alias -Name t -Value Get-GitTree -Force -Option AllScope
 
-function Get-GitPush { & git push $args }
-New-Alias -Name gps -Value Get-GitPush -Force -Option AllScope
-function Get-GitPull { & git pull $args }
-New-Alias -Name gpl -Value Get-GitPull -Force -Option AllScope
 function Get-GitFetch { & git fetch $args }
 New-Alias -Name f -Value Get-GitFetch -Force -Option AllScope
 function Get-GitCheckout { & git checkout $args }
