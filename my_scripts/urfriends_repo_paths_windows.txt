@@ -1,0 +1,7 @@
+C:\Users\jayha\OneDrive\Documents\Code-git\org_urfriends\public
+C:\Users\jayha\OneDrive\Documents\Code-git\org_urfriends\org_chart
+C:\Users\jayha\OneDrive\Documents\Code-git\org_urfriends\urhumans-api
+C:\Users\jayha\OneDrive\Documents\Code-git\org_urfriends\cloud-functions
+C:\Users\jayha\OneDrive\Documents\Code-git\org_urfriends\urfriends-stripe-webhooks
+C:\Users\jayha\OneDrive\Documents\Code-git\org_urfriends\create-user-acct-service
+C:\Users\jayha\OneDrive\Documents\Code-git\org_urfriends\create-user-acct-proxy

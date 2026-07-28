@@ -1,10 +1,19 @@
 param(
-  [string]$File = "urfriends_repo_paths.txt"
+  [string]$File,
+  [string]$MacFile = "urfriends_repo_paths.txt",
+  [string]$WindowsFile = "urfriends_repo_paths_windows.txt"
 )
 
 # ---- RESOLVE SCRIPT DIRECTORY (ALWAYS CORRECT) ----
 $ScriptDir = Split-Path -Parent $MyInvocation.MyCommand.Path
-$FilePath = Join-Path $ScriptDir $File
+$SelectedFile = if ($File) {
+  $File
+} elseif ($IsWindows) {
+  $WindowsFile
+} else {
+  $MacFile
+}
+$FilePath = Join-Path $ScriptDir $SelectedFile
 
 # ---- VALIDATE FILE ----
 if (!(Test-Path $FilePath)) {
@@ -12,9 +21,11 @@ if (!(Test-Path $FilePath)) {
   exit 1
 }
 
-$repos = Get-Content $FilePath |
-ForEach-Object { $_.Trim() } |
-Where-Object { $_ -ne "" }
+$repos = @(
+  Get-Content $FilePath |
+  ForEach-Object { $_.Trim() } |
+  Where-Object { $_ -ne "" }
+)
 
 if ($repos.Count -eq 0) {
   Write-Error "No repos found in $FilePath"
@@ -22,10 +33,12 @@ if ($repos.Count -eq 0) {
 }
 
 function Expand-Path($p) {
-  if ($p.StartsWith("~")) {
-    return $p -replace "^~", $HOME
+  $path = [string]$p
+
+  if ($path.StartsWith("~")) {
+    return $path -replace "^~", $HOME
   }
-  return $p
+  return $path
 }
 
 $rootPane = $env:WEZTERM_PANE
