@@ -226,11 +226,11 @@ function RunClass-OnWindows {
 }
 Set-Alias rcw RunClass-OnWindows
 
-function OpenPlanning {
+function OpenPersonalSystem {
 
     if ($IsMacOS) {
         Write-Host "PowerShell is running on macOS."
-        Set-Location -Path "$HOME/Documents/GitHub/plans/config"
+        Set-Location -Path "$HOME/Documents/GitHub/meditations/config"
         & /bin/zsh -c 'source ./launch.zsh'
     }
     elseif ($IsLinux) {
@@ -238,13 +238,13 @@ function OpenPlanning {
     }
     elseif ($IsWindows) {
         # Write-Host "PowerShell is running on Windows."
-        C:\Users\jayha\plan.ps1
+        C:\Users\jayha\onedrive\Documents\GitHub\personal_system\plan.ps1
     }
     else {
         Write-Host "PowerShell is running on an unknown operating system."
     }
 }
-Set-Alias plan OpenPlanning
+Set-Alias ops OpenPersonalSystem
 
 function Open-WebBusiness {
     $scriptPath = Join-Path (Split-Path $PROFILE) "my_scripts/web_business.ps1"
