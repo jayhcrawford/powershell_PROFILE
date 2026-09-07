@@ -230,7 +230,7 @@ function OpenPersonalSystem {
 
     if ($IsMacOS) {
         Write-Host "PowerShell is running on macOS."
-        Set-Location -Path "$HOME/Documents/GitHub/meditations/config"
+        Set-Location -Path "$HOME/Documents/GitHub/personal_system"
         & /bin/zsh -c 'source ./launch.zsh'
     }
     elseif ($IsLinux) {
@@ -238,7 +238,7 @@ function OpenPersonalSystem {
     }
     elseif ($IsWindows) {
         # Write-Host "PowerShell is running on Windows."
-        C:\Users\jayha\onedrive\Documents\GitHub\personal_system\plan.ps1
+        C:\Users\jayha\onedrive\Documents\GitHub\personal_system\personal_system_launcher.ps1
     }
     else {
         Write-Host "PowerShell is running on an unknown operating system."
