@@ -229,9 +229,9 @@ Set-Alias rcw RunClass-OnWindows
 function OpenPersonalSystem {
 
     if ($IsMacOS) {
-        Write-Host "PowerShell is running on macOS."
-        Set-Location -Path "$HOME/Documents/GitHub/personal_system"
-        & /bin/zsh -c 'source ./launch.zsh'
+        # Set-Location -Path "$HOME/Documents/GitHub/personal_system"
+        # & /bin/zsh -c 'source ./launch.zsh'
+        . "/Users/jaycrawford/Documents/GitHub/personal_system/personal_system_launcher.ps1"
     }
     elseif ($IsLinux) {
         Write-Host "PowerShell is running on Linux."
